@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<!--
+    Copyright (c) 2012-2016 Adobe Systems Incorporated. All rights reserved.
+
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+    <!-- This is a wide open CSP declaration. To lock this down for production, see below. --><!-- 
+    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" /> -->
+    <!-- Good default declaration:
+    * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+    * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+    * Disables use of eval() and inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+        * Enable inline JS: add 'unsafe-inline' to default-src
+        * Enable eval(): add 'unsafe-eval' to default-src
+    * Create your own at http://cspisawesome.com
+    -->
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" /> -->
+
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Hello World</title>
+    <script>
+        function hideValidation() {
+            document.getElementById("emailValidate").style.display = 'none';
+            document.getElementById("typeValidate").style.display = 'none';
+            document.getElementById("dateValidate").style.display = 'none';
+            document.getElementById("priceValidate").style.display = 'none';
+            document.getElementById("sratingValidate").style.display = 'none';
+            document.getElementById("cratingValidate").style.display = 'none';
+            document.getElementById("fratingValidate").style.display = 'none';
+            document.getElementById("repNameValidate").style.display = 'none'; 
+        }
+        
+        function validateForm() {
+            var name = document.forms["feedbackForm"]["nameInput"].value;     
+            var type = document.forms["feedbackForm"]["typeInput"].value;    
+            var date = document.forms["feedbackForm"]["dateInput"].value;  
+            var price =  document.forms["feedbackForm"]["priceInput"].value;  
+            var srating = document.forms["feedbackForm"]["srating"].value;  
+            var crating = document.forms["feedbackForm"]["crating"].value;
+            var frating = document.forms["feedbackForm"]["frating"].value;
+            var repName = document.forms["feedbackForm"]["repName"].value;
+            var sub = true;
+
+            if (name == "") {
+                document.getElementById("emailValidate").style.display = 'block';
+                sub = false;
+            } else {
+                document.getElementById("emailValidate").style.display = 'none';
+            }
+
+            if (type == "0") {
+                document.getElementById("typeValidate").style.display = 'block';
+                sub = false;
+            } else {
+                document.getElementById("typeValidate").style.display = 'none';
+            }
+
+            if (date == "") {
+                document.getElementById("dateValidate").style.display = 'block';
+                sub = false;
+            } else {
+                document.getElementById("dateValidate").style.display = 'none';
+                sub = true;
+            }
+
+            if (price == "") {
+                document.getElementById("priceValidate").style.display = 'block';
+                sub = false;
+            } else {
+                document.getElementById("priceValidate").style.display = 'none';
+                sub = true;
+            }
+
+            if (srating == "0") {
+                document.getElementById("sratingValidate").style.display = 'block';
+                sub = false;
+            } else {
+                document.getElementById("sratingValidate").style.display = 'none';
+                sub = true;
+            }
+
+            if (crating == "0") {
+                document.getElementById("cratingValidate").style.display = 'block';
+                sub = false;
+            } else {
+                document.getElementById("cratingValidate").style.display = 'none';
+                sub = true;
+            }
+
+            if (frating == "0") {
+                document.getElementById("fratingValidate").style.display = 'block';
+                sub = false;
+            } else {
+                document.getElementById("fratingValidate").style.display = 'none';
+                sub = true;
+            }
+
+            if (repName == "") {
+                document.getElementById("repNameValidate").style.display = 'block';
+                sub = false;
+            } else {
+                document.getElementById("repNameValidate").style.display = 'none';
+                sub = true;
+            }
+
+            
+            if (sub == false) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+    </script>
+</head>
+
+<body onload="hideValidation();">
+    <div class="container">
+        <h1>Feedback Form</h1>
+        <form name="feedbackForm" onsubmit="return validateForm()">
+
+          <div class="form-group">
+            <label for="exampleInputEmail1">Restaurant Name*</label>
+            <input type="text" class="form-control" name="nameInput" id="nameInput" aria-describedby="emailHelp" placeholder="Enter Restaurant Name">
+            <small id="emailValidate" class="form-text text-muted" style="color: #00ff00;">Please enter a Restaurant Name</small>
+          </div>
+
+          <div class="form-group">
+            <label for="exampleFormControlSelect1">Restaurant Type*</label>
+            <select class="form-control" name="typeInput" id="typeInput">
+              <option value="0">Please select a restaurant type</option>
+              <option>Grill</option>
+              <option>Fast food</option>
+              <option>Sea food</option>
+              <option>Take away</option>
+            </select>
+            <small id="typeValidate" class="form-text text-muted" style="color: #00ff00;">Please enter a Restaurant Type</small>
+          </div>
+
+          <div class="form-group">
+            <label for="exampleInputEmail1">Date/Type*</label>
+            <input type="email" class="form-control" name="dateInput" id="dateInput" aria-describedby="emailHelp" placeholder="Enter Restaurant Name">
+            <small id="dateValidate" class="form-text text-muted" style="color: #00ff00;">Please enter a date and time</small>
+          </div>
+
+          <div class="form-group">
+            <label for="exampleInputEmail1">Average meal price per person*</label>
+            <input type="text" class="form-control" name="priceInput" id="priceInput" aria-describedby="emailHelp" placeholder="Enter Price">
+            <small id="priceValidate" class="form-text text-muted" style="color: #00ff00;">Please enter an average meal price</small>
+          </div>
+
+          <div class="form-group">
+            <label for="exampleFormControlSelect1">Service rating*</label>
+            <select class="form-control" name="srating" id="srating">
+              <option value="0">Please select a rating</option>
+              <option>Need to improve</option>
+              <option>Okay</option>
+              <option>Good</option>
+              <option>Excellent</option>
+            </select>
+            <small id="sratingValidate" class="form-text text-muted" style="color: #00ff00;">Please select rating</small>
+          </div>
+
+          <div class="form-group">
+            <label for="exampleFormControlSelect1">Cleanliness rating*</label>
+            <select class="form-control" name="crating" id="crating">
+              <option value="0">Please select a rating</option>
+              <option>Need to improve</option>
+              <option>Okay</option>
+              <option>Good</option>
+              <option>Excellent</option>
+            </select>
+            <small id="cratingValidate" class="form-text text-muted" style="color: #00ff00;">Please select rating</small>
+          </div>
+
+          <div class="form-group">
+            <label for="exampleFormControlSelect1">Food quality rating*</label>
+            <select class="form-control" name="frating" id="frating">
+              <option value="0">Please select a rating</option>
+              <option>Need to improve</option>
+              <option>Okay</option>
+              <option>Good</option>
+              <option>Excellent</option>
+            </select>
+            <small id="fratingValidate" class="form-text text-muted" style="color: #00ff00;">Please select rating</small>
+          </div>
+
+          <div class="form-group">
+            <label for="exampleFormControlTextarea1">Notes</label>
+            <textarea class="form-control" name="notes" id="notes" rows="3"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="exampleInputEmail1">Name of the reporter*</label>
+            <input type="text" class="form-control" name="repName" id="repName" aria-describedby="emailHelp" placeholder="Enter Name">
+            <small id="repNameValidate" class="form-text text-muted" style="color: #00ff00;">Please enter name of reporter</small>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript">
+        app.initialize();
+    </script>
+</body>
+
+</html>
